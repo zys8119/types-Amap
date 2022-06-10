@@ -1,0 +1,20 @@
+{
+    "name": "@types/amap",
+    "version": "0.0.1",
+    "description": "高德地图类型补充",
+    "main": "index.d.ts",
+    "types": "index.d.ts",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zys8119/types-Amap.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/zys8119/types-Amap/issues"
+    },
+    "homepage": "https://github.com/zys8119/types-Amap#readme"
+}
