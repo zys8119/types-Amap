@@ -132,6 +132,7 @@ export interface MarkerOptions {
     offset:Pixel
     icon:Icon | string
     content:object | string
+    extData:any
 }
 
 export class Pixel {
