@@ -5,7 +5,7 @@
 ## 安装
 
 ```
-npm i @types-amap
+npm i types-amap
 ```
 
 ## @types 发包 流程
