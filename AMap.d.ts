@@ -99,6 +99,8 @@ export class Marker {
     remove():void
     on<K extends keyof AMapMapEventMap>(type:K, callback:(ev:AMapMapEventMap[K])=>any, context?:any){}
     getContent?():any
+    getExtData?():any
+    getPosition?():any
 }
 
 export class Size {
