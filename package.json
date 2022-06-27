@@ -1,6 +1,6 @@
 {
     "name": "types-amap",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "高德地图类型补充",
     "main": "index.d.ts",
     "types": "index.d.ts",
