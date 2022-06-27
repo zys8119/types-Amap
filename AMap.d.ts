@@ -90,6 +90,16 @@ export class AMapMap{
     setCenter(position:LngLat):void;
     getAllOverlays<K extends keyof overlayersMap>(type?:K): overlayersMap[K]
     on<K extends keyof AMapMapEventMap>(type:K, callback:(ev:AMapMapEventMap[K])=>any, context?:any){}
+
+    /**
+     * setFitView
+     * @param markers
+     */
+    setFitView(markers: Marker[]){}
+
+    setZoomAndCenter(zoom:number, center:LngLat){}
+    setZoom(zoom:number){}
+    getZoom():number{}
 }
 
 // https://lbs.amap.com/api/javascript-api/reference/overlay#marker
