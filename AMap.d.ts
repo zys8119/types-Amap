@@ -108,9 +108,10 @@ export class Marker {
     }
     remove():void
     on<K extends keyof AMapMapEventMap>(type:K, callback:(ev:AMapMapEventMap[K])=>any, context?:any){}
-    getContent?():any
-    getExtData?():any
-    getPosition?():any
+    getContent():any
+    setContent(content:any):void
+    getExtData():any
+    getPosition():any
 }
 
 export class Size {
@@ -379,6 +380,31 @@ export class Geocoder{
     setCity(city:string):void
 }
 
+export class MarkerCluster {
+    constructor(map: AMapMap, dataOptions: Array<dataOptions>, MarkerClusterOptions?: Partial<MarkerClusterOptions>) {
+    }
+}
+
+export type dataOptions = {
+    lnglat:LngLat
+    weight:number
+}
+
+export interface MarkerClusterOptions{
+    gridSize:number
+    maxZoom:number
+    averageCenter:boolean
+    clusterByZoomChange:boolean
+    styles:any[],
+    renderClusterMarker:(data:MarkerClusterOptionsRenderMarker)=>void
+    renderMarker:(data:MarkerClusterOptionsRenderMarker)=>void
+}
+
+export interface MarkerClusterOptionsRenderMarker {
+    count:number
+    marker:Marker
+}
+
 export interface GeocoderOptions {
     city:string
     radius:number
@@ -497,6 +523,7 @@ export interface AMapInstance{
     setCenter:typeof setCenter
     InfoWindow:typeof InfoWindow
     Geocoder:typeof Geocoder
+    MarkerCluster:typeof MarkerCluster
 }
 
 export interface LocaInstance {
