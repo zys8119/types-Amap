@@ -24,6 +24,16 @@ export interface AMapMapEventHotspotclick {
     id:string;
 }
 
+export interface AMapMapEventMoving {
+    passedPath:Array<Array<number>>
+    index:number
+    passedPos:number[]
+    pos:LngLat
+    progress:number
+    target:any
+    type:'moving'
+}
+
 export interface AMapMapEventMap {
     "click":AMapMapEventClick
     "dblclick":AMapMapEventClick
@@ -40,6 +50,7 @@ export interface AMapMapEventMap {
     "mapmove":unknown
     "movestart":unknown
     "moveend":unknown
+    "moving":AMapMapEventMoving
     "zoomchange":unknown
     "zoomstart":unknown
     "zoomend":unknown
@@ -87,7 +98,7 @@ export class AMapMap{
     add(overlayers:any[] | any){}
     remove(overlayers:any[] | any){}
     clearMap(){}
-    setCenter(position:LngLat):void;
+    setCenter(position:LngLat, immediately?:boolean, duration?:number):void;
     getAllOverlays<K extends keyof overlayersMap>(type?:K): overlayersMap[K]
     on<K extends keyof AMapMapEventMap>(type:K, callback:(ev:AMapMapEventMap[K])=>any, context?:any){}
 
@@ -95,7 +106,7 @@ export class AMapMap{
      * setFitView
      * @param markers
      */
-    setFitView(markers: Marker[]){}
+    setFitView(markers?: Marker[], immediately?:boolean, avoid?:number[], maxZoom?:number){}
 
     setZoomAndCenter(zoom:number, center:LngLat){}
     setZoom(zoom:number){}
@@ -109,10 +120,26 @@ export class Marker {
     remove():void
     on<K extends keyof AMapMapEventMap>(type:K, callback:(ev:AMapMapEventMap[K])=>any, context?:any){}
     getContent():any
-    setContent(content:any):void
     getExtData():any
     getPosition():any
+    pauseMove():any
+    resumeMove():any
+    stopMove():any
+    moveAlong(path:Array<LngLat>, opts?:Partial<MoveAlongOptions>):any
 }
+
+export interface MoveAlongOptions {
+    duration:number | AnimationCallback
+    speed:number | AnimationCallback
+    easing:number
+    circlable:boolean
+    delay:number
+    aniInterval:number | AnimationCallback
+    aniInterval:number
+    autoRotation:boolean
+}
+
+export type AnimationCallback = (index:number, data:LngLat)=>void
 
 export class Size {
     constructor(public width:Number, public height:Number) {
@@ -380,31 +407,6 @@ export class Geocoder{
     setCity(city:string):void
 }
 
-export class MarkerCluster {
-    constructor(map: AMapMap, dataOptions: Array<dataOptions>, MarkerClusterOptions?: Partial<MarkerClusterOptions>) {
-    }
-}
-
-export type dataOptions = {
-    lnglat:LngLat
-    weight:number
-}
-
-export interface MarkerClusterOptions{
-    gridSize:number
-    maxZoom:number
-    averageCenter:boolean
-    clusterByZoomChange:boolean
-    styles:any[],
-    renderClusterMarker:(data:MarkerClusterOptionsRenderMarker)=>void
-    renderMarker:(data:MarkerClusterOptionsRenderMarker)=>void
-}
-
-export interface MarkerClusterOptionsRenderMarker {
-    count:number
-    marker:Marker
-}
-
 export interface GeocoderOptions {
     city:string
     radius:number
@@ -523,7 +525,6 @@ export interface AMapInstance{
     setCenter:typeof setCenter
     InfoWindow:typeof InfoWindow
     Geocoder:typeof Geocoder
-    MarkerCluster:typeof MarkerCluster
 }
 
 export interface LocaInstance {
