@@ -25,7 +25,7 @@ export interface AMapMapEventHotspotclick {
 }
 
 export interface AMapMapEventMoving {
-    passedPath:Array<Array<number>>
+    passedPath:Array<LngLat>
     index:number
     passedPos:number[]
     pos:LngLat
@@ -74,11 +74,20 @@ export interface CircleOptions {
     strokeWeight:number
 }
 export interface Circle {}
-export class PolylineOptions {
+export interface PolylineOptions {
+    map:AMapMap
+    strokeStyle:string
+    strokeColor:string
+    strokeWeight:number
+    strokeOpacity:number
+    path:Array<LngLat>
+    showDir:boolean
+}
+export class Polyline {
     constructor(PolylineOptions?:Partial<PolylineOptions>) {
     }
+    setPath(path:Array<LngLat>):void
 }
-export interface Polyline {}
 export class Polygon {
     constructor(PolygonOptions?:Partial<PolygonOptions>) {
     }
