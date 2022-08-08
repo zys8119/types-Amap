@@ -87,6 +87,7 @@ export class Polyline {
     constructor(PolylineOptions?:Partial<PolylineOptions>) {
     }
     setPath(path:Array<LngLat>):void
+    setAttitude(attitude?:any):void
 }
 export class Polygon {
     constructor(PolygonOptions?:Partial<PolygonOptions>) {
