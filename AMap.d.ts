@@ -121,6 +121,8 @@ export class AMapMap{
     setZoomAndCenter(zoom:number, center:LngLat){}
     setZoom(zoom:number){}
     getZoom():number{}
+    setRotation(rotation:number, immediately?:boolean):number{}
+    getRotation():number{}
 }
 
 // https://lbs.amap.com/api/javascript-api/reference/overlay#marker
@@ -431,6 +433,23 @@ export class Container {
     add(layer:PulseLineLayer):void
     animate:{
         start():void
+        stop():void
+    }
+    viewControl:ContainerViewControl
+}
+
+export interface ContainerViewControl {
+    addAnimates(configs:ContainerViewControlAnimates, finised?:()=>void)
+}
+
+export type ContainerViewControlAnimates = ContainerViewControlAnimatesItem[]
+
+export type ContainerViewControlAnimatesItem<T> = {
+    [key:string]:{
+        value:any
+        control:Array<Array<number | unknown>>
+        control:Array<number>
+        duration:number
     }
 }
 
