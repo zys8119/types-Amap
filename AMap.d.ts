@@ -91,9 +91,46 @@ export class Polyline {
 }
 export class Polygon {
     constructor(PolygonOptions?:Partial<PolygonOptions>) {
+
     }
+    setOptions(optArg:Partial<PolygonOptions>):void
+    getOptions():PolygonOptions
+    hide():void
+    show():void
+    destroy():void
+    getPlaneHeight():number
+    getExtData():any
+    setExtData(extData:any):void
+    getPath():Array<any>
+    setPath(path:Array<any>):void
+    getBounds():any
+    isTerrain(isTerrain:boolean):any
+    generateBuffer(gl:any):any
+
+    /**
+     * 判断坐标是否在多边形内
+     * @param originPoint
+     */
+    contains(originPoint:LngLat):boolean
 }
-export interface PolygonOptions {}
+export interface PolygonOptions {
+    [key:string]:any
+    map:AMapMap
+    path:Array<any>
+    zIndex:number
+    strokeOpacity:number
+    fillOpacity:number
+    strokeWeight:number
+    height:number
+    bubble:boolean
+    draggable:boolean
+    fillColor:string
+    strokeStyle:string
+    strokeColor:string
+    cursor:string
+    strokeDasharray:Array<number>
+    extData:object
+}
 export interface overlayersMap {
     "marker":Marker
     "circle":Circle
@@ -402,6 +439,18 @@ export interface InfoWindowOptions {
     retainWhenClose:boolean;
 }
 
+export interface GeoJSONOptions {
+    geoJSON:Record<any, any>
+    getMarker(geojson:Record<any, any>, lnglat:Array<Array<LngLat>>):void
+    getPolygon(geojson:Record<any, any>, lnglat:Array<Array<LngLat>>):void
+    getPolyline(geojson:Record<any, any>, lnglat:Array<Array<LngLat>>):void
+}
+
+export class GeoJSON {
+    constructor(GeoJSONOptions?:Partial<GeoJSONOptions>) {
+    }
+}
+
 
 export class Geocoder{
     constructor(GeocoderOptions?:Partial<GeocoderOptions>) {
@@ -554,6 +603,7 @@ export interface AMapInstance{
     setCenter:typeof setCenter
     InfoWindow:typeof InfoWindow
     Geocoder:typeof Geocoder
+    GeoJSON:typeof GeoJSON
 }
 
 export interface LocaInstance {
